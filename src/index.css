@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Copied base styles from project root index.css. If you use Tailwind, ensure postcss/tailwind is configured. */
+:root {
+}

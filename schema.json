@@ -1,0 +1,697 @@
+{
+  "Customer Master": {
+    "description": "Thông tin định danh khách hàng và các trường raw trong bảng Customer Master.",
+    "columns": [
+      {
+        "Feature": "customer_id",
+        "Category": "Identifier",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER",
+        "Description": "ID duy nhất khách hàng (khóa join)",
+        "Example": "CUST_000123",
+        "NullPolicy": "NOT NULL",
+        "BusinessMeaning": "Key để ghép dữ liệu, không dùng trực tiếp làm feature"
+      },
+      {
+        "Feature": "signup_date",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "DATE/TIMESTAMP",
+        "Description": "Ngày đăng ký khách hàng",
+        "Example": "2019-11-01",
+        "NullPolicy": "NULLABLE",
+        "BusinessMeaning": "Dùng để tính tenure"
+      },
+      {
+        "Feature": "relationship_start_date",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "DATE/TIMESTAMP",
+        "Description": "Ngày bắt đầu quan hệ thực sự",
+        "Example": "2019-11-01",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "account_open_date",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "DATE/TIMESTAMP",
+        "Description": "Ngày mở account (account-level)",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "date_of_birth",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "DATE",
+        "Description": "Ngày sinh",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "gender",
+        "Category": "Raw",
+        "Used in Model": "⚠️",
+        "DataType": "STRING",
+        "Description": "Giới tính (M/F/O/U)",
+        "NullPolicy": "'U'"
+      },
+      {
+        "Feature": "city",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING",
+        "Description": "Thành phố/thị trấn",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "region",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "STRING",
+        "Description": "Vùng (mapping từ city)",
+        "NullPolicy": "'UNKNOWN'"
+      },
+      {
+        "Feature": "customer_type",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "STRING",
+        "Description": "retail / corporate / SME",
+        "NullPolicy": "'UNKNOWN'"
+      },
+      {
+        "Feature": "segment",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "STRING",
+        "Description": "Phân đoạn marketing",
+        "NullPolicy": "'UNSEGMENTED'"
+      },
+      {
+        "Feature": "tier",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "STRING/INTEGER",
+        "Description": "Hạng khách hàng",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "risk_rating",
+        "Category": "Raw",
+        "Used in Model": "⚠️",
+        "DataType": "STRING/INTEGER",
+        "Description": "Đánh giá rủi ro (Risk)",
+        "NullPolicy": "'UNASSIGNED'"
+      },
+      {
+        "Feature": "customer_name",
+        "Category": "PII",
+        "Used in Model": "❌",
+        "DataType": "STRING",
+        "Description": "Tên khách hàng (PII)",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "phone",
+        "Category": "PII",
+        "Used in Model": "❌",
+        "DataType": "STRING",
+        "Description": "Số điện thoại (PII)",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "email",
+        "Category": "PII",
+        "Used in Model": "❌",
+        "DataType": "STRING",
+        "Description": "Email (PII)",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "account_id",
+        "Category": "Identifier",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER",
+        "Description": "ID account",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "account_close_date",
+        "Category": "Outcome",
+        "Used in Model": "❌❌",
+        "DataType": "DATE/TIMESTAMP",
+        "Description": "Ngày đóng account (OUTCOME)",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "close_reason",
+        "Category": "Outcome",
+        "Used in Model": "❌❌",
+        "DataType": "STRING",
+        "Description": "Lý do đóng (OUTCOME)",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "status",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING",
+        "Description": "Trạng thái account tại snapshot",
+        "NullPolicy": "'UNKNOWN'"
+      },
+      {
+        "Feature": "kyc_status",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING",
+        "Description": "Trạng thái KYC",
+        "NullPolicy": "'NOT_SUBMITTED'"
+      }
+    ]
+  },
+  "CASA": {
+    "description": "Bảng giao dịch CASA — các trường raw (không bao gồm engineered features)",
+    "columns": [
+      {
+        "Feature": "customerid",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER",
+        "Description": "Mã khách hàng (join key)",
+        "NullPolicy": "NOT NULL"
+      },
+      {
+        "Feature": "id",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER",
+        "Description": "Row id trong nguồn CASA",
+        "NullPolicy": "NOT NULL"
+      },
+      {
+        "Feature": "snapshot_month",
+        "Category": "Time index",
+        "Used in Model": "❌",
+        "DataType": "YYYYMM/DATE",
+        "Description": "Mốc snapshot để tính feature/label",
+        "NullPolicy": "NOT NULL"
+      },
+      {
+        "Feature": "casa_daily_average_balance",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "NUMERIC",
+        "Description": "Daily average balance"
+      },
+      {
+        "Feature": "casa_inflow",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "NUMERIC",
+        "Description": "Tổng tiền vào trong kỳ",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "casa_outflow",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "NUMERIC",
+        "Description": "Tổng tiền ra trong kỳ",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "casa_transaction_count",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "INTEGER",
+        "Description": "Số giao dịch trong kỳ",
+        "NullPolicy": "0"
+      },
+      {
+        "Feature": "casa_transaction_avg_amount",
+        "Category": "Raw",
+        "Used in Model": "⚠️",
+        "DataType": "NUMERIC",
+        "Description": "Giá trị trung bình mỗi giao dịch",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "casa_closing_balance",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "NUMERIC",
+        "Description": "Số dư cuối kỳ",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "casa_opening_balance",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "NUMERIC",
+        "Description": "Số dư đầu kỳ",
+        "NullPolicy": "NULLABLE"
+      },
+      {
+        "Feature": "casa_active_flag",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "BOOLEAN/INT",
+        "Description": "Indicator có giao dịch trong kỳ trước (lagged)",
+        "NullPolicy": "0"
+      },
+      {
+        "Feature": "casa_account_status",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING",
+        "Description": "Trạng thái account (mapped)",
+        "NullPolicy": "'UNKNOWN'"
+      },
+      {
+        "Feature": "casa_status_code",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING",
+        "Description": "Mã trạng thái chi tiết",
+        "NullPolicy": "'UNKNOWN'"
+      },
+      {
+        "Feature": "account_closure_date",
+        "Category": "Outcome",
+        "Used in Model": "❌❌",
+        "DataType": "DATE/TIMESTAMP",
+        "Description": "Ngày đóng account (label/outcome)",
+        "NullPolicy": "NULLABLE"
+      }
+    ]
+  },
+  "Loan": {
+    "description": "Bảng Loan — các trường raw (không bao gồm engineered features)",
+    "columns": [
+      {
+        "Feature": "id",
+        "Category": "Identifier",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER"
+      },
+      {
+        "Feature": "customerid",
+        "Category": "Identifier",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER"
+      },
+      {
+        "Feature": "snapshot_month",
+        "Category": "Time index",
+        "Used in Model": "❌",
+        "DataType": "YYYYMM/DATE"
+      },
+      {
+        "Feature": "loan_outstanding_balance",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "NUMERIC"
+      },
+      {
+        "Feature": "loan_monthly_payment",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "NUMERIC"
+      },
+      {
+        "Feature": "loan_count",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "INTEGER"
+      },
+      {
+        "Feature": "loan_payment_status",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "loan_status",
+        "Category": "Outcome",
+        "Used in Model": "❌❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "loan_written_off",
+        "Category": "Outcome",
+        "Used in Model": "❌❌",
+        "DataType": "BOOLEAN"
+      }
+    ]
+  },
+  "Credit Card": {
+    "description": "Bảng Credit Card — các trường raw (không bao gồm engineered features)",
+    "columns": [
+      {
+        "Feature": "credit_card_transaction_count",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "INTEGER"
+      },
+      {
+        "Feature": "credit_card_spending",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "NUMERIC"
+      },
+      {
+        "Feature": "credit_card_utilization_rate",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "NUMERIC"
+      },
+      {
+        "Feature": "credit_card_outstanding_balance",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "NUMERIC"
+      },
+      {
+        "Feature": "card_product_type",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "statement_balance",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "NUMERIC"
+      },
+      {
+        "Feature": "minimum_due",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "NUMERIC"
+      },
+      {
+        "Feature": "payment_amount",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "NUMERIC"
+      },
+      {
+        "Feature": "auto_debit_flag",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "BOOLEAN"
+      },
+      {
+        "Feature": "credit_card_count",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "INTEGER"
+      },
+      {
+        "Feature": "credit_card_payment_status",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "credit_card_has_arrears",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "BOOLEAN"
+      },
+      {
+        "Feature": "credit_card_limit",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "NUMERIC"
+      }
+    ]
+  },
+  "Demographic": {
+    "description": "Các trường nhân khẩu học (Customer-level)",
+    "columns": [
+      {
+        "Feature": "customer_age",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "INTEGER"
+      },
+      {
+        "Feature": "income_level",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "NUMERIC/STRING"
+      },
+      {
+        "Feature": "employment_status",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "product_count",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "INTEGER"
+      },
+      {
+        "Feature": "occupation",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "residence_location",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "channel_preference",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "created_date",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "DATE/TIMESTAMP"
+      }
+    ]
+  },
+  "Channel Usage": {
+    "description": "Các trường raw về hành vi sử dụng kênh số (digital/channel activity)",
+    "columns": [
+      {
+        "Feature": "customer_id",
+        "Category": "Identifier",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER"
+      },
+      {
+        "Feature": "snapshot_month",
+        "Category": "Time index",
+        "Used in Model": "❌",
+        "DataType": "YYYYMM/DATE"
+      },
+      {
+        "Feature": "channel_type",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "login_count",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "INTEGER"
+      },
+      {
+        "Feature": "transaction_count",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "INTEGER"
+      },
+      {
+        "Feature": "transaction_amount",
+        "Category": "Raw",
+        "Used in Model": "✅",
+        "DataType": "NUMERIC"
+      },
+      {
+        "Feature": "active_flag",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "BOOLEAN"
+      },
+      {
+        "Feature": "last_activity_date",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "DATE/TIMESTAMP"
+      },
+      {
+        "Feature": "device_type",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "failed_login_count",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "INTEGER"
+      },
+      {
+        "Feature": "session_duration",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "NUMERIC"
+      }
+    ]
+  },
+  "Customer Interaction": {
+    "description": "Các trường raw về tương tác khách hàng, tickets và khiếu nại (không bao gồm các feature derived)",
+    "columns": [
+      {
+        "Feature": "customer_id",
+        "Category": "Identifier",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER"
+      },
+      {
+        "Feature": "interaction_id",
+        "Category": "Identifier",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER"
+      },
+      {
+        "Feature": "interaction_date",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "DATE/TIMESTAMP"
+      },
+      {
+        "Feature": "interaction_channel",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "interaction_type",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "interaction_reason",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "interaction_status",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "resolution_code",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "priority_level",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER"
+      },
+      {
+        "Feature": "assigned_team",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "interaction_text",
+        "Category": "PII/Text",
+        "Used in Model": "⚠️",
+        "DataType": "TEXT",
+        "Description": "Nội dung tương tác (nên mask/anonymize)"
+      }
+    ]
+  },
+  "Campaign Response": {
+    "description": "Các trường raw liên quan đến chiến dịch marketing và phản hồi",
+    "columns": [
+      {
+        "Feature": "customer_id",
+        "Category": "Identifier",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER"
+      },
+      {
+        "Feature": "campaign_id",
+        "Category": "Identifier",
+        "Used in Model": "❌",
+        "DataType": "STRING/INTEGER"
+      },
+      {
+        "Feature": "campaign_type",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "campaign_channel",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "campaign_start_date",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "DATE/TIMESTAMP"
+      },
+      {
+        "Feature": "campaign_end_date",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "DATE/TIMESTAMP"
+      },
+      {
+        "Feature": "campaign_sent_date",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "DATE/TIMESTAMP"
+      },
+      {
+        "Feature": "campaign_response_flag",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "BOOLEAN"
+      },
+      {
+        "Feature": "response_date",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "DATE/TIMESTAMP"
+      },
+      {
+        "Feature": "response_type",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      },
+      {
+        "Feature": "offer_type",
+        "Category": "Raw",
+        "Used in Model": "❌",
+        "DataType": "STRING"
+      }
+    ]
+  }
+}
